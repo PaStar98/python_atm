@@ -3,7 +3,6 @@ GET_BALANCE = open("_money.txt", "r")
 
 
 def atm_logic(balance):
-
     save_balance = open("_money.txt", "w")
 
     choose_option = int(input("1 -> Wypłata gotówki | 2 -> Wpłata gotówki\n"))
