@@ -3,7 +3,6 @@ GET_BALANCE = open("_money.txt", "r")
 
 
 def atm_logic(balance):
-
     save_balance = open("_money.txt", "w")
 
     choose_option = int(input("1 -> Wypłata gotówki | 2 -> Wpłata gotówki\n"))
@@ -19,8 +18,19 @@ def atm_logic(balance):
             print("Wypłaciłeś " + str(type_value) + " zł")
             print("Twoje obecne saldo konta to: " + str(calc) + " zł")
     elif choose_option == 2:
-        # Praca domowa dla moich skurwysynów (tj. kochanych studentów) #
         type_value = int(input("Podaj kwotę do wpłaty: "))
+        if int(type_value) < 0:
+            # FIXME: THERE MUST BE BETTER WAY TO DO IT
+            print("Nie można wykonać operacji, usuwamy ci kase biedaku")
+            save_balance.write(balance)
+            save_balance.close()
+            return
+        else:
+            calc = int(balance) + int(type_value)
+            save_balance.write(str(calc))
+            print("Wpłaciłeś " + str(type_value) + " zł")
+            print("Twoje obecne saldo konta to: " + str(calc) + " zł")
+
     else:
         print("Podano nieprawidłową wartość, spróbuj ponownie!")
         return
